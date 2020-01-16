@@ -18,8 +18,10 @@ import {
 } from '@angular/common/http/testing';
 
 import {
+  skyAuthHttpBlobOptions,
   skyAuthHttpJsonOptions,
-  skyAuthHttpOptions
+  skyAuthHttpOptions,
+  skyAuthHttpTextOptions
 } from './auth-options';
 
 //#endregion
@@ -80,4 +82,31 @@ describe('Auth options', () => {
       });
   });
 
+  it('should provide a method that enforces a responseType of text', () => {
+    const options = skyAuthHttpTextOptions();
+
+    expect(options.observe).toBe('body');
+    expect(options.responseType).toBe('text');
+
+    http.get('https://www.example.com', options)
+        .subscribe((_foo: string) => {
+          // The only thing being verified here is that the call to `http.get<T>()` compiles,
+          // since it's possible changing the return type of `skyAuthHttpJsonOptions()` to
+          // not match an overload of the `HttpClient` methods could result in a compiler error.
+        });
+  });
+
+  it('should provide a method that enforces a responseType of blob', () => {
+    const options = skyAuthHttpBlobOptions();
+
+    expect(options.observe).toBe('body');
+    expect(options.responseType).toBe('blob');
+
+    http.get('https://www.example.com', options)
+        .subscribe((_foo: Blob) => {
+          // The only thing being verified here is that the call to `http.get<T>()` compiles,
+          // since it's possible changing the return type of `skyAuthHttpJsonOptions()` to
+          // not match an overload of the `HttpClient` methods could result in a compiler error.
+        });
+  });
 });

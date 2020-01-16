@@ -74,3 +74,71 @@ export function skyAuthHttpJsonOptions(options?: {
 
   return skyAuthHttpOptions(options);
 }
+
+/**
+ * Provides the standard options expected by Angular's HttpClient methods along with
+ * additional options for making requests to services protected by Blackbaud ID and
+ * ensures that the subsequent call to `HttpClient` returns the generic type passed
+ * to it by enforcing a `responseType` of `'text'`.
+ * @param options
+ */
+export function skyAuthHttpTextOptions(options?: {
+  body?: any,
+  headers?: HttpHeaders,
+  observe?: 'body',
+  params?: HttpParams,
+  reportProgress?: boolean,
+  permissionScope?: string,
+  responseType?: 'text',
+  withCredentials?: boolean
+}): {
+  body?: any,
+  headers?: HttpHeaders,
+  observe?: 'body',
+  params?: HttpParams,
+  reportProgress?: boolean,
+  permissionScope?: string,
+  responseType: 'text',
+  withCredentials?: boolean
+} {
+  options = options || {};
+
+  options.observe = 'body';
+  options.responseType = 'text';
+
+  return skyAuthHttpOptions(options);
+}
+
+/**
+ * Provides the standard options expected by Angular's HttpClient methods along with
+ * additional options for making requests to services protected by Blackbaud ID and
+ * ensures that the subsequent call to `HttpClient` returns the generic type passed
+ * to it by enforcing a `responseType` of `'blob'`.
+ * @param options
+ */
+export function skyAuthHttpBlobOptions(options?: {
+  body?: any,
+  headers?: HttpHeaders,
+  observe?: 'body',
+  params?: HttpParams,
+  reportProgress?: boolean,
+  permissionScope?: string,
+  responseType?: 'blob',
+  withCredentials?: boolean
+}): {
+  body?: any,
+  headers?: HttpHeaders,
+  observe?: 'body',
+  params?: HttpParams,
+  reportProgress?: boolean,
+  permissionScope?: string,
+  responseType: 'blob',
+  withCredentials?: boolean
+} {
+  options = options || {};
+
+  options.observe = 'body';
+  options.responseType = 'blob';
+
+  return skyAuthHttpOptions(options);
+}
